@@ -1,3 +1,6 @@
+## Management System for customers
+This project has been built for React Practice Project for Customer Management System
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
