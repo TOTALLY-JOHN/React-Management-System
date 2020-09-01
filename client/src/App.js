@@ -26,9 +26,23 @@ const styles = theme => ({
 });
 
 class App extends Component {
-  state = {
-    customers: "",
-    completed: 0
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      customers: '',
+      completed: 0
+    }
+  }
+
+  stateRefresh = () => {
+    this.setState({
+      customers: '',
+      completed: 0
+    });
+    this.callApi()
+      .then(res => this.setState({customers: res}))
+      .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -63,6 +77,7 @@ class App extends Component {
                 <TableCell>Birthday</TableCell>
                 <TableCell>Gender</TableCell>
                 <TableCell>Job</TableCell>
+                <TableCell>Settings</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -70,6 +85,7 @@ class App extends Component {
               this.state.customers ? this.state.customers.map(c => {
               return (
                   <Customer
+                      stateRefresh={this.stateRefresh}
                       key={c.id}
                       id={c.id}
                       image={c.image}
@@ -89,7 +105,7 @@ class App extends Component {
             </TableBody>
           </Table>
         </Paper>
-        <CustomerAdd/>
+        <CustomerAdd stateRefresh={this.stateRefresh}/>
       </div>
     );
   }
